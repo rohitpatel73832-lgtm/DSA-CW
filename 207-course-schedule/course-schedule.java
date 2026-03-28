@@ -5,7 +5,7 @@ class Solution {
             adj.add(new ArrayList<>());
         }
         int[] indegree=new int[n];
-        boolean[] vis=new boolean[n];
+        //boolean[] vis=new boolean[n];
         for(int i=0;i<pre.length;i++){
             int a=pre[i][0], b=pre[i][1];
             adj.get(b).add(a);
@@ -16,7 +16,7 @@ class Solution {
         for(int i=0;i<n;i++){
             if(indegree[i]==0){
                 q.add(i);
-                vis[i]=true;
+               // vis[i]=true;
             }
         }
         while(q.size()>0){
@@ -25,7 +25,8 @@ class Solution {
             for(int ele: adj.get(front)){
                 indegree[ele]--;
                 if(indegree[ele]==0){
-                    q.add(ele);vis[ele]=true;
+                    q.add(ele);
+                    //vis[ele]=true;
                 }
             }
         }
