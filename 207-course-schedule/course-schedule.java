@@ -11,6 +11,8 @@ class Solution {
             adj.get(b).add(a);
             indegree[a]++;
         }
+
+        //kahn,s algo
         Queue<Integer> q= new LinkedList<>();
         List<Integer> ans=new ArrayList<>();
         for(int i=0;i<n;i++){
