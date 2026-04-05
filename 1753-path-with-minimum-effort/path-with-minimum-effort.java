@@ -1,6 +1,6 @@
 class Solution {
 
-    public class Triplet  {
+    public class Triplet implements Comparable<Triplet>  {
         int row;
         int col;
         int effort;
@@ -9,6 +9,10 @@ class Solution {
             this.row = row;
             this.col = col;
             this.effort = effort;
+        }
+        public int compareTo(Triplet t){
+            if(this.effort==t.effort) return this.row-t.row;
+            return this.effort-t.effort;
         }
     }
 
@@ -25,13 +29,11 @@ class Solution {
 
         ans[0][0] = 0;
 
-        PriorityQueue<Triplet> pq = new PriorityQueue<>(
-            (a, b) -> a.effort - b.effort
-        );
+        PriorityQueue<Triplet> pq = new PriorityQueue<>();
 
         pq.add(new Triplet(0, 0, 0));
 
-        while (!pq.isEmpty()) {
+        while (pq.size()>0) {
 
             Triplet top = pq.remove();
             int row = top.row;
