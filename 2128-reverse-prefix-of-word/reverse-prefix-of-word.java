@@ -1,11 +1,15 @@
 class Solution {
-    public String reversePrefix(String s, char ch) {
-        int idx = s.indexOf(ch);
-        if (idx == -1) return s;  
-        
-        StringBuilder sb = new StringBuilder(s.substring(0, idx + 1));
-        sb.reverse();
-        
-        return sb.toString() + s.substring(idx + 1);
+    public String reversePrefix(String word, char ch) {
+        int idx = word.indexOf(ch);
+        if(idx == -1) {
+            return word;
+        }
+
+        StringBuilder res = new StringBuilder(word.substring(0, idx + 1)).reverse();
+        if(idx < word.length()) {
+            res.append(word.substring(idx + 1));
+        }
+
+        return res.toString();
     }
 }
