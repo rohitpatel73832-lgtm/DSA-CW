@@ -11,8 +11,8 @@
 class Solution {
     public int getDecimalValue(ListNode head) {
         ListNode temp = head;
-        String s="";
-        StringBuilder sb = new StringBuilder(s);
+        //String s="";
+        StringBuilder sb = new StringBuilder("");
         while(temp!=null){
             sb.append(temp.val);
             temp=temp.next;
