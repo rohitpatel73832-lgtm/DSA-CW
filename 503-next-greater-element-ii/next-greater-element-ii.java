@@ -4,7 +4,7 @@ class Solution {
         int[] ans= new int[n];
         for( int i=0; i<n ; i++){
             ans[i] = -1;
-            for(int j=0;j<n; j++){
+            for(int j=1;j<n; j++){
                 int next = nums[(i + j) % n];
                 if(nums[i]<next){
                     ans[i]=next;
