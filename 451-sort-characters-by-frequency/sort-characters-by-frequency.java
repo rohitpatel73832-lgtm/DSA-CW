@@ -12,7 +12,7 @@ class Solution {
         for (char ch : list) {
             int freq = mp.get(ch);
 
-            while (freq > 0) {
+            while (freq != 0) {
                 ans.append(ch);
                 freq--;
             }
