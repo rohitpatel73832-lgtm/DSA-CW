@@ -1,6 +1,5 @@
 
 class Solution {
-    static int i=0;
     // public TreeNode makeBst(ArrayList<Integer> arr,int lo,int hi){
     //     if(lo>hi) return null;
     //     int mid=(lo+hi)/2;
@@ -15,19 +14,18 @@ class Solution {
         arr.add(root.val);
         inorder(root.right,arr);
     }
-        public void fixTree(TreeNode root, ArrayList<Integer> arr) {
+        public void fixTree(TreeNode root, ArrayList<Integer> arr, int[] index) {
         if(root == null) return;
 
-        fixTree(root.left, arr);
+        fixTree(root.left, arr, index);
 
-        root.val = arr.get(i);
-        i++;
+        root.val = arr.get(index[0]);
+        index[0]++;
 
-        fixTree(root.right, arr);
+        fixTree(root.right, arr, index);
     }
 
     public void recoverTree(TreeNode root) {
-        i=0;
 
         ArrayList<Integer> arr = new ArrayList<>();
 
@@ -41,6 +39,6 @@ class Solution {
         int[] index = {0};
         
 
-        fixTree(root, arr);
+        fixTree(root, arr, index);
     }
 }
