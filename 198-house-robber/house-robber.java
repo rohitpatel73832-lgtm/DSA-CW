@@ -4,8 +4,6 @@ class Solution {
         if (i >= nums.length) return 0;
 
         if (dp[i] != -1) return dp[i];
-
-        
         int skip = amount(nums, i+1, dp);
         int take = nums[i] + amount(nums, i+2, dp);
 
