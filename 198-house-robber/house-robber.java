@@ -1,5 +1,3 @@
-
-
 class Solution {
 
     public int amount(int[] nums, int i, int[] dp) {
@@ -7,8 +5,9 @@ class Solution {
 
         if (dp[i] != -1) return dp[i];
 
-        int take = nums[i] + amount(nums, i+2, dp);
+        
         int skip = amount(nums, i+1, dp);
+        int take = nums[i] + amount(nums, i+2, dp);
 
         return dp[i] = Math.max(take, skip);
     }
