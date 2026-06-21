@@ -73,16 +73,16 @@ class Solution {
 
         int take = Integer.MAX_VALUE;
 
-        if (arr[st] <= n) {
-            int temp = helper(st, arr, n - arr[st], dp);
+if (arr[st] <= n) {
+    take = helper(st, arr, n - arr[st], dp);
 
-            if (temp != Integer.MAX_VALUE)
-                take = 1 + temp;
-        }
+    if (take != Integer.MAX_VALUE)
+        take = 1 + take;
+}
 
-        int skip = helper(st + 1, arr, n, dp);
+int skip = helper(st + 1, arr, n, dp);
 
-        return dp[st][n] = Math.min(take, skip);
+return dp[st][n] = Math.min(take, skip);
     }
 
     public int numSquares(int n) {
