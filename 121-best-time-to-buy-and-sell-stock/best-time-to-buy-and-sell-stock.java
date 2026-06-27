@@ -1,33 +1,76 @@
 // class Solution {
-//     public int maxProfit(int[] prices) {
-//         int n=prices.length;
-//         int profit=Integer.MIN_VALUE;
-//         for(int i=0; i<n; i++){
-//             for(int j=i+1; j<n; j++){
-//                 int diff=prices[j]-prices[i];
-//                 //if(diff>0){
-//                     profit=Math.max(profit,diff);
-//                 //}
-//             }
-//         }
-//         if(profit<=0) {
+
+//     public int helper(int i, int canBuy, int cap, int[] prices) {
+
+//         if (i == prices.length || cap == 0)
 //             return 0;
-//         }else{
-//             return profit;
+
+//         if (canBuy == 1) {
+
+//             int buy = -prices[i] + helper(i + 1, 0, cap, prices);
+
+//             int skip = helper(i + 1, 1, cap, prices);
+
+//             return Math.max(buy, skip);
+
+//         } else {
+
+//             int sell = prices[i] + helper(i + 1, 1, cap - 1, prices);
+
+//             int hold = helper(i + 1, 0, cap, prices);
+
+//             return Math.max(sell, hold);
 //         }
-        
+//     }
+
+//     public int maxProfit(int[] prices) {
+//         return helper(0, 1, 1, prices);
 //     }
 // }
-class Solution {
-    public int maxProfit(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
-        int maxProfit = 0;
+import java.util.Arrays;
 
-        for (int price : prices) {
-            minPrice = Math.min(minPrice, price);
-            maxProfit = Math.max(maxProfit, price - minPrice);
+class Solution {
+
+    public int helper(int i, int canBuy, int cap, int[] prices, int[][][] dp) {
+
+        if (i == prices.length || cap == 0)
+            return 0;
+
+        if (dp[i][canBuy][cap] != -1)
+            return dp[i][canBuy][cap];
+
+        if (canBuy == 1) {
+
+            int buy = -prices[i] + helper(i + 1, 0, cap, prices, dp);
+
+            int skip = helper(i + 1, 1, cap, prices, dp);
+
+            dp[i][canBuy][cap] = Math.max(buy, skip);
+
+        } else {
+
+            int sell = prices[i] + helper(i + 1, 1, cap - 1, prices, dp);
+
+            int hold = helper(i + 1, 0, cap, prices, dp);
+
+            dp[i][canBuy][cap] = Math.max(sell, hold);
         }
 
-        return maxProfit;
+        return dp[i][canBuy][cap];
+    }
+
+    public int maxProfit(int[] prices) {
+
+        int n = prices.length;
+
+        int[][][] dp = new int[n][2][2];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 2; j++) {
+                Arrays.fill(dp[i][j], -1);
+            }
+        }
+
+        return helper(0, 1, 1, prices, dp);
     }
 }
