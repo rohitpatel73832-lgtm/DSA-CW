@@ -6,13 +6,14 @@ class Solution {
             int buy=-prices[i] + helper(i+1,0,prices,dp);
             int skip= helper(i+1,1,prices,dp);
             dp[i][canBuy]=Math.max(buy,skip);
-            return dp[i][canBuy];
+            //return dp[i][canBuy];
         }else{
             int sell=prices[i] + helper(i+2,1,prices,dp);
             int hold=helper(i+1,0,prices,dp);
             dp[i][canBuy]=Math.max(sell,hold);
-            return dp[i][canBuy];
+            // return dp[i][canBuy];
         }
+        return dp[i][canBuy];
     }
     public int maxProfit(int[] prices) {
         int n=prices.length;
