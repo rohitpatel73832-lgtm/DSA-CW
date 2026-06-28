@@ -15,7 +15,8 @@ class Solution {
          int[] dp2= new int[n];
         //LIS -> Right to Left
         for(int i=n-1; i>=0; i--){
-            for(int j=i+1; j<=n-1; j++){
+            //for(int j=i+1; j<=n-1; j++){
+             for (int j = n - 1; j >= i + 1; j--) {
                 if(nums[i]>nums[j]){
                     dp2[i]=Math.max(dp2[i],dp2[j]);
                 }
