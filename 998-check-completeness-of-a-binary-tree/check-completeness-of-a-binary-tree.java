@@ -19,18 +19,18 @@ class Solution {
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
 
-        boolean foundNull = false;
+        boolean isFound = false;
 
         while (q.size()>0) {
 
             TreeNode node = q.remove();
 
             if (node == null) {
-                foundNull = true;
+                isFound = true;
                
             } else {
 
-                if (foundNull)
+                if (isFound)
                     return false;
 
                 q.add(node.left);
