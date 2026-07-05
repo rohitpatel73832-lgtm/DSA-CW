@@ -27,6 +27,7 @@ class Solution {
 
             if (node == null) {
                 foundNull = true;
+               
             } else {
 
                 if (foundNull)
