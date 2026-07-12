@@ -1,6 +1,6 @@
 class Solution {
     public int numberOfSpecialChars(String word) {
-
+        int ans = 0;
         HashMap<Character, Integer> firstUpper = new HashMap<>();
         HashMap<Character, Integer> lastLower = new HashMap<>();
 
@@ -15,7 +15,7 @@ class Solution {
             }
         }
 
-        int ans = 0;
+        
 
         for (char ch : lastLower.keySet()) {
             if (firstUpper.containsKey(ch)
