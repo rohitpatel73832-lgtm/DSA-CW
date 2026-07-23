@@ -1,38 +1,37 @@
 class Solution {
-
-    public void bfs(int st,List<List<Integer>> adj,boolean[] vis){
-        Queue<Integer> q=new LinkedList<>();
+    public void bfs(int st,List<List<Integer>> ans, boolean[] vis){
+        Queue<Integer> q= new LinkedList<>();
         q.add(st);
         vis[st]=true;
         while(q.size()>0){
-            int front=q.remove();
-            for(int ele:adj.get(front)){
+            int front = q.remove();
+            for(int ele: ans.get(front)){
                 if(vis[ele]==false){
-                    vis[ele]=true;
                     q.add(ele);
-                    
+                    vis[ele]=true;
                 }
             }
-            
         }
     }
-    public boolean validPath(int n, int[][] edges, int st, int end) {
-        List<List<Integer>> adj=new ArrayList<>();
-        for(int i=0; i<n;i++){
-            ArrayList<Integer> in=new ArrayList<>();
-            adj.add(in);
+    public boolean validPath(int n, int[][] edges, int s, int dest) {
+        int m=edges.length;
+        List<List<Integer>> ans= new ArrayList<>();
+        boolean[] vis= new boolean[n];
+        for(int i=0; i<n; i++){
+            ans.add(new ArrayList<>());
         }
-        for(int i = 0; i < edges.length; i++){
-            int a = edges[i][0];
-            int b = edges[i][1];
-
-            adj.get(a).add(b);
-            adj.get(b).add(a);
+        for(int i=0; i<m; i++){
+            int a=edges[i][0];
+            int b=edges[i][1];
+            ans.get(a).add(b);
+            ans.get(b).add(a);
         }
 
-        boolean[] vis=new boolean[n];
-        vis[st]=true;
-        bfs(st,adj,vis);
-        return vis[end];
+        for(int i=0; i<n; i++){
+            if(!vis[i]){
+                bfs(s,ans,vis);
+            }
+        }
+        return vis[dest];
     }
 }
