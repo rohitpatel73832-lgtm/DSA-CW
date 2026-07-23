@@ -35,7 +35,7 @@ class Solution {
         int ans = Integer.MAX_VALUE;
 
         while (!q.isEmpty()) {
-            int curr = q.poll();
+            int curr = q.remove();
 
             for (Pair ele : graph.get(curr)) {
 
