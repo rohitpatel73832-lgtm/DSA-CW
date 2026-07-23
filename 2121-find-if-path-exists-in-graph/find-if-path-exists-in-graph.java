@@ -1,11 +1,12 @@
 class Solution {
-    public void bfs(int st,List<List<Integer>> ans, boolean[] vis){
+    public void bfs(int st,List<List<Integer>> ans, boolean[] vis,int dest){
         Queue<Integer> q= new LinkedList<>();
         q.add(st);
         vis[st]=true;
         while(q.size()>0){
             int front = q.remove();
             for(int ele: ans.get(front)){
+                
                 if(vis[ele]==false){
                     q.add(ele);
                     vis[ele]=true;
@@ -29,7 +30,7 @@ class Solution {
 
         for(int i=0; i<n; i++){
             if(!vis[i]){
-                bfs(s,ans,vis);
+                bfs(s,ans,vis,dest);
             }
         }
         return vis[dest];
