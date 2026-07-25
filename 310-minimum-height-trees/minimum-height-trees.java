@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
 
@@ -11,7 +9,7 @@ class Solution {
         }
 
         List<List<Integer>> adj = new ArrayList<>();
-        int[] degree = new int[n];
+        int[] indegree = new int[n];
 
         for (int i = 0; i < n; i++) {
             adj.add(new ArrayList<>());
@@ -24,43 +22,47 @@ class Solution {
             adj.get(u).add(v);
             adj.get(v).add(u);
 
-            degree[u]++;
-            degree[v]++;
+            indegree[u]++;
+            indegree[v]++;
         }
 
         Queue<Integer> q = new LinkedList<>();
 
         // Put all leaves into queue
         for (int i = 0; i < n; i++) {
-            if (degree[i] == 1) {
-                q.offer(i);
+            if (indegree[i] == 1) {
+                q.add(i);
             }
         }
 
-        int remainingNodes = n;
+        int remaining = n;
 
-        while (remainingNodes > 2) {
+        while (remaining > 2) {
 
             int size = q.size();
-            remainingNodes -= size;
+            remaining -= size;
 
-            while (size-- > 0) {
+            ans.clear();   // Keep only the last level
 
-                int leaf = q.poll();
+            for (int i = 0; i < size; i++) {
 
-                for (int nei : adj.get(leaf)) {
+                int front = q.remove();
+                ans.add(front);
 
-                    degree[nei]--;
+                for (int ele : adj.get(front)) {
+                    indegree[ele]--;
 
-                    if (degree[nei] == 1) {
-                        q.offer(nei);
+                    if (indegree[ele] == 1) {
+                        q.add(ele);
                     }
                 }
             }
         }
 
+        ans.clear();
+
         while (!q.isEmpty()) {
-            ans.add(q.poll());
+            ans.add(q.remove());
         }
 
         return ans;
