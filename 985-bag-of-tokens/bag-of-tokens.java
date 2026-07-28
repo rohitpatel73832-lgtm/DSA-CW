@@ -18,7 +18,7 @@ class Solution {
                 j--;
             }
             else {
-                break;
+                return maxScore;
             }
         }
 
