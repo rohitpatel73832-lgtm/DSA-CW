@@ -21,11 +21,8 @@ class Solution {
         int maxDays = 0;
 
         for (int i = 0; i < adj.size(); i++) {
-
             Pair curr = adj.get(i);
-
             days += curr.pt;
-
             maxDays = Math.max(maxDays, days + curr.gt);
         }
 
