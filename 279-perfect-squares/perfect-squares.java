@@ -1,4 +1,24 @@
 class Solution {
+    public int helper(int n,int[] dp ){
+        if(n==0) return 0;
+        if(dp[n]!=-1) return dp[n];
+        int ans=Integer.MAX_VALUE;
+        int result=0;
+        
+        for(int i=1;i*i<=n; i++){
+            result=1+helper(n-i*i,dp);
+            ans=Math.min(ans,result);
+        }
+        return dp[n]= ans;
+    }
+    public int numSquares(int n) {
+        int[] dp = new int[10001];
+        Arrays.fill(dp,-1);
+        return helper(n,dp);
+        
+    }
+}
+// class Solution {
     // public boolean isPerfect(int n){
     //     int sqrt=(int)Math.sqrt(n);
     //     if(sqrt*sqrt==n) return true;
@@ -60,48 +80,48 @@ class Solution {
 
    
 
-    public int helper(int st, int[] arr, int n, int[][] dp) {
+//     public int helper(int st, int[] arr, int n, int[][] dp) {
 
-        if (n == 0)
-            return 0;
+//         if (n == 0)
+//             return 0;
 
-        if (st >= arr.length)
-            return Integer.MAX_VALUE;
+//         if (st >= arr.length)
+//             return Integer.MAX_VALUE;
 
-        if (dp[st][n] != -1)
-            return dp[st][n];
+//         if (dp[st][n] != -1)
+//             return dp[st][n];
 
-        int take = Integer.MAX_VALUE;
+//         int take = Integer.MAX_VALUE;
 
-if (arr[st] <= n) {
-    take = helper(st, arr, n - arr[st], dp);
+// if (arr[st] <= n) {
+//     take = helper(st, arr, n - arr[st], dp);
 
-    if (take != Integer.MAX_VALUE)
-        take = 1 + take;
-}
+//     if (take != Integer.MAX_VALUE)
+//         take = 1 + take;
+// }
 
-int skip = helper(st + 1, arr, n, dp);
+// int skip = helper(st + 1, arr, n, dp);
 
-return dp[st][n] = Math.min(take, skip);
-    }
+// return dp[st][n] = Math.min(take, skip);
+//     }
 
-    public int numSquares(int n) {
+//     public int numSquares(int n) {
 
-        int size = (int) Math.sqrt(n);
+//         int size = (int) Math.sqrt(n);
 
-        int[] arr = new int[size];
+//         int[] arr = new int[size];
 
-        for (int i = 1; i <= size; i++) {
-            arr[i - 1] = i * i;
-        }
+//         for (int i = 1; i <= size; i++) {
+//             arr[i - 1] = i * i;
+//         }
 
-        int[][] dp = new int[size][n + 1];
+//         int[][] dp = new int[size][n + 1];
 
-        for (int i = 0; i < size; i++) {
-            Arrays.fill(dp[i], -1);
-        }
+//         for (int i = 0; i < size; i++) {
+//             Arrays.fill(dp[i], -1);
+//         }
 
-        return helper(0, arr, n, dp);
-    }
+//         return helper(0, arr, n, dp);
+//     }
 
-}
+// }
