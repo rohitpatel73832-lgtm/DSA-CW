@@ -1,41 +1,39 @@
 class Solution {
 
-    public int helper(int i, int[] nums, int[] dp) {
+    public int helper(int st, int n, int[] nums, int[] dp) {
 
-        int n = nums.length;
-
-        if (i >= n - 1) {
+        if (st >= n - 1) {
             return 0;
         }
 
-        if (dp[i] != -1) {
-            return dp[i];
+        if (nums[st] == 0) {
+            return Integer.MAX_VALUE;
         }
 
-        int ans = Integer.MAX_VALUE;
+        if (dp[st] != -1) {
+            return dp[st];
+        }
 
-        for (int jump = 1; jump <= nums[i]; jump++) {
+        int jump = Integer.MAX_VALUE;
 
-            int next = i + jump;
+        for (int i = 1; i <= nums[st] && st + i < n; i++) {
 
-            if (next < n) {
+            int ans = helper(st + i, n, nums, dp);
 
-                int temp = helper(next, nums, dp);
-
-                if (temp != Integer.MAX_VALUE) {
-                    ans = Math.min(ans, 1 + temp);
-                }
+            if (ans != Integer.MAX_VALUE) {
+                jump = Math.min(jump, 1 + ans);
             }
         }
 
-        return dp[i] = ans;
+        return dp[st] = jump;
     }
 
     public int jump(int[] nums) {
 
-        int[] dp = new int[nums.length];
+        int n = nums.length;
+        int[] dp = new int[n];
         Arrays.fill(dp, -1);
 
-        return helper(0, nums, dp);
+        return helper(0, n, nums, dp);
     }
 }
