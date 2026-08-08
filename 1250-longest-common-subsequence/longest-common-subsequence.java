@@ -1,5 +1,4 @@
 class Solution {
-    //static int[][] dp;
     public int lcs(int i,int j,StringBuilder a,StringBuilder b,int[][] dp){
         if(i<0 || j<0) return 0;
         if(dp[i][j]!=-1) return dp[i][j];
