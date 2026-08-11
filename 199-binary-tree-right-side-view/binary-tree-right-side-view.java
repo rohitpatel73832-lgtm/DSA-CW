@@ -16,8 +16,7 @@ class Solution {
 
     public List<Integer> rightSideView(TreeNode root) {
 
-        List<Integer> ans =
-                new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
 
         helper(root, 0, ans);
 
