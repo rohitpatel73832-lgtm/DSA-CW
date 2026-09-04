@@ -5,8 +5,8 @@ class Solution {
         int[][] arr = new int[n][2];
 
         for (int i = 0; i < n; i++) {
-            int t = (int)Math.ceil((double)dist[i]  / speed[i]);
-            //int t = (dist[i] + speed[i] - 1) / speed[i];
+            //int t = (int)Math.ceil((double)dist[i]  / speed[i]);
+            int t = (dist[i] + speed[i] - 1) / speed[i];
 
             arr[i][0] = t;
             arr[i][1] = speed[i];
