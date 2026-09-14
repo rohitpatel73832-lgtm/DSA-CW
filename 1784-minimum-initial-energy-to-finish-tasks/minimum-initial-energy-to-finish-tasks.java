@@ -24,7 +24,7 @@ class Solution {
         );
 
         int l=0;
-        int r=10000009;
+        int r=1000009;
         int ans=0;
         while(l<=r){
             int mid=l+(r-l)/2;
