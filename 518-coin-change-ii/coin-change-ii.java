@@ -1,59 +1,94 @@
+// // class Solution {
+
+// //     public int helper(int index, int amount, int[] coins) {
+
+// //         if (amount == 0)
+// //             return 1;
+
+// //         if (index == coins.length)
+// //             return 0;
+
+// //         int take = 0;
+
+// //         if (coins[index] <= amount) {
+// //             take = helper(index, amount - coins[index], coins);
+// //         }
+
+// //         int skip = helper(index + 1, amount, coins);
+
+// //         return take + skip;
+// //     }
+
+// //     public int change(int amount, int[] coins) {
+// //         return helper(0, amount, coins);
+// //     }
+// // }
+
 // class Solution {
 
-//     public int helper(int index, int amount, int[] coins) {
+//     public int helper(int index, int amount, int[] coins, int[][] dp) {
 
-//         if (amount == 0)
+        
+//         if (amount == 0) {
 //             return 1;
+//         }
 
-//         if (index == coins.length)
+        
+//         if (index == coins.length) {
 //             return 0;
+//         }
+
+        
+//         if (dp[index][amount] != -1) {
+//             return dp[index][amount];
+//         }
 
 //         int take = 0;
 
+        
 //         if (coins[index] <= amount) {
-//             take = helper(index, amount - coins[index], coins);
+//             take = helper(index, amount - coins[index], coins, dp);
 //         }
 
-//         int skip = helper(index + 1, amount, coins);
+        
+//         int skip = helper(index + 1, amount, coins, dp);
 
-//         return take + skip;
+//         return dp[index][amount] = take + skip;
 //     }
 
 //     public int change(int amount, int[] coins) {
-//         return helper(0, amount, coins);
+
+//         int[][] dp = new int[coins.length][amount + 1];
+
+//         for (int i = 0; i < coins.length; i++) {
+//             Arrays.fill(dp[i], -1);
+//         }
+
+//         return helper(0, amount, coins, dp);
 //     }
 // }
 
 class Solution {
 
-    public int helper(int index, int amount, int[] coins, int[][] dp) {
+    public int helper(int amount, int[] coins, int st, int var, int[][] dp) {
 
-        
-        if (amount == 0) {
+        if (var == amount) {
             return 1;
         }
 
-        
-        if (index == coins.length) {
+        if (st >= coins.length || var > amount) {
             return 0;
         }
 
-        
-        if (dp[index][amount] != -1) {
-            return dp[index][amount];
+        if (dp[st][var] != -1) {
+            return dp[st][var];
         }
 
-        int take = 0;
+        int skip = helper(amount, coins, st + 1, var, dp);
 
-        
-        if (coins[index] <= amount) {
-            take = helper(index, amount - coins[index], coins, dp);
-        }
+        int take = helper(amount, coins, st, var + coins[st], dp);
 
-        
-        int skip = helper(index + 1, amount, coins, dp);
-
-        return dp[index][amount] = take + skip;
+        return dp[st][var] = skip + take;
     }
 
     public int change(int amount, int[] coins) {
@@ -64,6 +99,6 @@ class Solution {
             Arrays.fill(dp[i], -1);
         }
 
-        return helper(0, amount, coins, dp);
+        return helper(amount, coins, 0, 0, dp);
     }
 }
