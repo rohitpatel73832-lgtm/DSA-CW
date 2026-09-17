@@ -1,37 +1,47 @@
 class Solution {
 
-    public void helper(int i, int[] candidates, int target,List<Integer> list, List<List<Integer>> ans) {
-                
-        if (target == 0) {
-            // ans.add(new ArrayList<>(list));
-            ans.add(list);
+    public void helper(int[] candidates, int target, int st, int sum,
+                       List<Integer> adj, List<List<Integer>> combine) {
+
+        if (sum == target) {
+            combine.add(new ArrayList<>(adj));
             return;
         }
-        if (i == candidates.length || target < 0)
+
+        if (st >= candidates.length || sum > target) {
             return;
-
-        if (candidates[i] <= target) {
-            List<Integer> newList = new ArrayList<>(list);
-            //list.add(candidates[i]);
-            newList.add(candidates[i]);
-            helper(i+1, candidates, target - candidates[i], newList, ans);
-            //list.remove(list.size() - 1); 
-        }
-        while (i + 1 < candidates.length &&
-               candidates[i] == candidates[i + 1]) {
-            i++;
         }
 
-        helper(i + 1, candidates, target, list, ans);
+        // take
+        adj.add(candidates[st]);
+
+        helper(candidates, target, st + 1,
+               sum + candidates[st], adj, combine);
+
+        // backtrack
+        adj.remove(adj.size() - 1);
+
+        // skip
+        int next = st + 1;
+
+        // skip duplicate values
+        while (next < candidates.length &&
+               candidates[next] == candidates[st]) {
+            next++;
+        }
+
+        helper(candidates, target, next, sum, adj, combine);
     }
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
         Arrays.sort(candidates);
 
-        List<List<Integer>> ans = new ArrayList<>();
+        List<List<Integer>> combine = new ArrayList<>();
+        List<Integer> adj = new ArrayList<>();
 
-        helper(0, candidates, target, new ArrayList<>(), ans);
+        helper(candidates, target, 0, 0, adj, combine);
 
-        return ans;
+        return combine;
     }
 }
