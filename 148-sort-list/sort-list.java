@@ -18,7 +18,7 @@ class Solution {
         }
         ListNode head1= new ListNode(0);
         ListNode t = head1;
-        //ListNode t= head;
+        
         Collections.sort(ans);
         for(int i=0; i<ans.size(); i++){
             ListNode a = new ListNode(ans.get(i));
